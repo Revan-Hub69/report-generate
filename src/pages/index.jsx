@@ -1,11 +1,11 @@
 "use client";
 
+import React, { useState } from "react"; // ✅ Import corretto
 import { generateHtmlPage } from "../utils/generateHtmlPage";
 import { generateBloccoHTML } from "../utils/generateBloccoHTML";
 import { tabLabels } from "../constants/tabLabels";
 import { statusToClass } from "../constants/statusToClass";
 import { tooltips } from "../constants/tooltipsAll";
-
 
 export default function HtmlGenerator() {
   const [jsonData, setJsonData] = useState({});
