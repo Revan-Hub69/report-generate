@@ -138,7 +138,7 @@ export function generateHtmlPage({
         Prima di intraprendere qualsiasi operazione, si raccomanda di consultare un consulente finanziario indipendente, abilitato e in possesso dei requisiti previsti dalla legge.
       </p>
       <p class="italic text-slate-500">
-        Tradelia AI non è affiliato ad alcun broker o intermediario citato nel report. Tutti i riferimenti sono forniti a scopo descrittivo.
+  Alcuni broker citati nel presente report possono prevedere affiliazione commerciale. La selezione è effettuata in modo autonomo da Tradelia AI, basandosi su criteri tecnici, operativi e di qualità dei servizi offerti, senza influenze dirette da parte degli intermediari.
       </p>
     </section>
   </main>
