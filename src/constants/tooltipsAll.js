@@ -11,7 +11,6 @@ import { tooltipsBlocco10 } from "./tooltipsBlocco10";
 import { tooltipsBlocco11 } from "./tooltipsBlocco11";
 import { tooltipsBlocco12 } from "./tooltipsBlocco12";
 import { tooltipsBlocco13 } from "./tooltipsBlocco13";
-import { tooltipsBlocco14 } from "./tooltipsBlocco14";
 
 export const tooltips = {
   blocco1: tooltipsBlocco1,
@@ -26,6 +25,4 @@ export const tooltips = {
   blocco10: tooltipsBlocco10,
   blocco11: tooltipsBlocco11,
   blocco12: tooltipsBlocco12,
-  blocco13: tooltipsBlocco13,
-  blocco14: tooltipsBlocco14
-};
+  blocco13: tooltipsBlocco13};
