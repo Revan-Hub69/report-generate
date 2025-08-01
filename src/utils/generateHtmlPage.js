@@ -25,8 +25,15 @@ export function generateHtmlPage({
     }
     ::-webkit-scrollbar { height: 8px; width: 10px; background: #e0e7ef; border-radius: 10px;}
     ::-webkit-scrollbar-thumb { background: #70a7e8; border-radius: 10px;}
-    .tabs-scroll::-webkit-scrollbar { height: 8px; background: #e0e7ef;}
-    .tabs-scroll::-webkit-scrollbar-thumb { background: #70a7e8; }
+    .tabs-scroll {
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #70a7e8 #e0e7ef;
+      padding-bottom: 2px;
+      margin-bottom: 6px;
+    }
+    .tabs-scroll::-webkit-scrollbar { height: 8px; background-color: #e0e7ef; border-radius: 8px; }
+    .tabs-scroll::-webkit-scrollbar-thumb { background-color: #70a7e8; border-radius: 8px; }
     .tab-btn { transition: background 0.17s, color 0.13s; }
     .tab-btn:hover, .tab-btn.active { background: #e0e7ef; color: #0369a1; }
     .card-blocco:hover { background: #f7fafc; box-shadow: 0 2px 16px 0 rgba(50,120,200,0.07);}
@@ -58,7 +65,6 @@ export function generateHtmlPage({
     .tooltip .tooltip-title { font-weight: 700; color: #60a5fa; margin-bottom: 5px; }
     .tooltip .tooltip-fonti { color: #dbeafe; font-size: 12px; margin-top: 10px; }
     @media (max-width: 700px) {
-      .tabs-scroll { overflow-x: auto; }
       .tab-btn { min-width: 170px; font-size: 13px; }
       .card-blocco { padding: 1.1rem 0.7rem;}
       .tooltip .tooltip-text { min-width: 160px; max-width: 90vw; font-size: 13px; padding: 10px 9px; }
@@ -88,7 +94,7 @@ export function generateHtmlPage({
       </div>
     </section>
 
-    <nav class="w-full flex overflow-x-auto tabs-scroll space-x-1 px-2 pb-1" style="scrollbar-width: thin;">
+    <nav class="w-full flex tabs-scroll space-x-1 px-2 pb-1">
       ${tabLabels
         .map(
           (label, i) => `
@@ -114,22 +120,43 @@ export function generateHtmlPage({
       </div>
     </section>
 
-   <section id="disclaimer" class="text-xs text-slate-600 border-t pt-6 mt-10 leading-relaxed">
-  <p class="mb-2 font-semibold">Disclaimer legale – Tradelia AI</p>
-  <p>
-    Questo report è generato da Tradelia AI, un sistema automatizzato di analisi finanziaria che non opera come consulente abilitato ai sensi della normativa vigente.
-    Le informazioni, i dati e i commenti presenti hanno finalità esclusivamente informative e non costituiscono in alcun modo una sollecitazione al pubblico risparmio né una raccomandazione personalizzata di investimento.
-  </p>
-  <p class="mt-2">
-    Sebbene le fonti utilizzate siano ritenute affidabili, Tradelia AI non garantisce l’accuratezza, la completezza o l’attualità dei contenuti riportati. L’utente resta l’unico responsabile delle proprie decisioni operative e finanziarie.
-    Prima di intraprendere qualsiasi operazione, si raccomanda di consultare un consulente finanziario indipendente, abilitato e in possesso dei requisiti previsti dalla legge.
-  </p>
-  <p class="mt-2 italic text-slate-500">
-    Tradelia AI non è affiliato ad alcun broker o intermediario citato nel report. Tutti i riferimenti sono forniti a scopo descrittivo.
-  </p>
-</section>
-
+    <section id="disclaimer" class="text-xs text-slate-600 bg-white border border-slate-200 rounded-xl mt-16 mb-12 px-5 py-6 leading-relaxed shadow-inner">
+      <h2 class="text-base font-semibold text-slate-800 mb-3">Disclaimer legale – Tradelia AI</h2>
+      <p class="mb-3">
+        Questo report è generato da Tradelia AI, un sistema automatizzato di analisi finanziaria che non opera come consulente abilitato ai sensi della normativa vigente.
+        Le informazioni, i dati e i commenti presenti hanno finalità esclusivamente informative e non costituiscono in alcun modo una sollecitazione al pubblico risparmio né una raccomandazione personalizzata di investimento.
+      </p>
+      <p class="mb-3">
+        Sebbene le fonti utilizzate siano ritenute affidabili, Tradelia AI non garantisce l’accuratezza, la completezza o l’attualità dei contenuti riportati. L’utente resta l’unico responsabile delle proprie decisioni operative e finanziarie.
+        Prima di intraprendere qualsiasi operazione, si raccomanda di consultare un consulente finanziario indipendente, abilitato e in possesso dei requisiti previsti dalla legge.
+      </p>
+      <p class="italic text-slate-500">
+        Tradelia AI non è affiliato ad alcun broker o intermediario citato nel report. Tutti i riferimenti sono forniti a scopo descrittivo.
+      </p>
+    </section>
   </main>
+
+  <script>
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-tab");
+
+        document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        document.querySelectorAll("section[id^='blocco']").forEach((sec) => {
+          sec.style.display = (sec.id === target) ? 'block' : 'none';
+        });
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const blocchi = document.querySelectorAll("section[id^='blocco']");
+      blocchi.forEach((b, i) => {
+        b.style.display = (i === 0) ? 'block' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
 `;
