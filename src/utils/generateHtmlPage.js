@@ -29,8 +29,9 @@ export function generateHtmlPage({
       overflow-x: auto;
       scrollbar-width: thin;
       scrollbar-color: #70a7e8 #e0e7ef;
-      padding: 6px 0 4px 0;
+      padding: 6px 4px 4px 4px;
       margin-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
     }
     .tabs-scroll::-webkit-scrollbar { height: 8px; background-color: #e0e7ef; border-radius: 8px; }
     .tabs-scroll::-webkit-scrollbar-thumb { background-color: #70a7e8; border-radius: 8px; }
@@ -38,6 +39,10 @@ export function generateHtmlPage({
       transition: background 0.17s, color 0.13s;
       white-space: nowrap;
       font-size: 13px;
+      min-width: 160px;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: 0.375rem;
     }
     .tab-btn:hover, .tab-btn.active {
       background: #e0e7ef;
@@ -48,37 +53,58 @@ export function generateHtmlPage({
       background: #f7fafc;
       box-shadow: 0 2px 16px 0 rgba(50,120,200,0.07);
     }
-    .tooltip { position: relative; display: inline-block; cursor: pointer; z-index: 2; }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      z-index: 2;
+    }
     .tooltip .tooltip-text {
       display: none;
-      position: fixed;
-      left: 50%; top: 53vh;
-      transform: translate(-50%, -50%);
+      position: absolute;
+      left: 50%;
+      top: 120%;
+      transform: translateX(-50%);
       background: #222e3a;
       color: #fff;
       min-width: 210px;
-      max-width: 340px;
+      max-width: 320px;
       font-size: 13px;
       border-radius: 9px;
       padding: 14px 18px;
-      box-shadow: 0 4px 24px 0 rgba(35,70,120,0.15);
-      z-index: 90;
-      line-height: 1.55;
+      box-shadow: 0 4px 24px rgba(35,70,120,0.15);
       pointer-events: none;
-      opacity: 0; transition: opacity 0.17s;
+      opacity: 0;
+      transition: opacity 0.17s ease;
+      white-space: normal;
+      z-index: 1000;
     }
     .tooltip:hover .tooltip-text,
     .tooltip:focus-within .tooltip-text {
       display: block;
-      pointer-events: all;
+      pointer-events: auto;
       opacity: 1;
     }
-    .tooltip .tooltip-title { font-weight: 700; color: #60a5fa; margin-bottom: 5px; }
-    .tooltip .tooltip-fonti { color: #dbeafe; font-size: 12px; margin-top: 10px; }
+    .tooltip span {
+      cursor: pointer;
+      user-select: none;
+      font-weight: 700;
+      color: #2563eb;
+      background: #dbeafe;
+      border-radius: 9999px;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      margin-left: 6px;
+    }
     @media (max-width: 700px) {
-      .tab-btn { min-width: 170px; }
-      .card-blocco { padding: 1.1rem 0.7rem; }
-      .tooltip .tooltip-text { min-width: 160px; max-width: 90vw; font-size: 13px; padding: 10px 9px; }
+      .tab-btn { min-width: 140px; font-size: 14px; }
+    }
+    @media (max-width: 400px) {
+      .tab-btn { min-width: 120px; font-size: 13px; padding-left: 0.75rem; padding-right: 0.75rem; }
     }
     @media (min-width: 640px) {
       .card-blocco { padding: 2.2rem 2.5rem; }
