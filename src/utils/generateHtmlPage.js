@@ -23,8 +23,8 @@ export function generateHtmlPage({
       color: #0f172a;
       margin: 0; padding: 0;
     }
-    ::-webkit-scrollbar { height: 8px; width: 10px; background: #e0e7ef; border-radius: 10px;}
-    ::-webkit-scrollbar-thumb { background: #70a7e8; border-radius: 10px;}
+    ::-webkit-scrollbar { height: 8px; width: 10px; background: #e0e7ef; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #70a7e8; border-radius: 10px; }
     .tabs-scroll {
       overflow-x: auto;
       scrollbar-width: thin;
@@ -114,34 +114,33 @@ export function generateHtmlPage({
 
     ${blocchiHtml.join("\n")}
 
-  <section id="cta" class="my-10 text-sm">
-  <div class="border-t border-slate-200 pt-6 px-4 sm:px-0">
-    <h2 class="text-base font-semibold text-slate-800 mb-4">Broker selezionati Tradelia AI</h2>
-    <div class="space-y-4">
-      <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-        <a href="https://www.tradelia.org/Exante.html" class="text-blue-700 font-semibold underline" target="_blank">Exante</a>
-        <p class="text-slate-600 mt-1 text-sm">Piattaforma professionale con accesso DMA, futures, azioni e opzioni globali</p>
+    <section id="cta" class="my-10 text-sm">
+      <div class="border-t border-slate-200 pt-6 px-4 sm:px-0">
+        <h2 class="text-base font-semibold text-slate-800 mb-4">Broker selezionati Tradelia AI</h2>
+        <div class="space-y-4">
+          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
+            <a href="https://www.tradelia.org/Exante.html" class="text-blue-700 font-semibold underline" target="_blank">Exante</a>
+            <p class="text-slate-600 mt-1 text-sm">Piattaforma professionale con accesso DMA, futures, azioni e opzioni globali</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
+            <a href="https://www.tradelia.org/Freedom24.html" class="text-blue-700 font-semibold underline" target="_blank">Freedom24</a>
+            <p class="text-slate-600 mt-1 text-sm">Accesso a IPO, ETF, titoli USA e obbligazioni sovrane a lungo termine</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
+            <a href="https://www.tradelia.org/AvaTrade.html" class="text-blue-700 font-semibold underline" target="_blank">AvaOptions</a>
+            <p class="text-slate-600 mt-1 text-sm">Trading su opzioni plain vanilla con interfaccia grafica professionale</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
+            <a href="https://www.tradelia.org/Pepperstone.html" class="text-blue-700 font-semibold underline" target="_blank">Pepperstone</a>
+            <p class="text-slate-600 mt-1 text-sm">CFD a commissioni competitive azioni</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
+            <a href="https://www.tradelia.org/NAGA.html" class="text-blue-700 font-semibold underline" target="_blank">NAGA</a>
+            <p class="text-slate-600 mt-1 text-sm">Social trading, azioni reali frazionate e copytrading integrato multi-asset</p>
+          </div>
+        </div>
       </div>
-      <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-        <a href="https://www.tradelia.org/Freedom24.html" class="text-blue-700 font-semibold underline" target="_blank">Freedom24</a>
-        <p class="text-slate-600 mt-1 text-sm">Accesso a IPO, ETF, titoli USA e obbligazioni sovrane a lungo termine</p>
-      </div>
-      <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-        <a href="https://www.tradelia.org/AvaTrade.html" class="text-blue-700 font-semibold underline" target="_blank">AvaOptions</a>
-        <p class="text-slate-600 mt-1 text-sm">Trading su opzioni plain vanilla con interfaccia grafica professionale</p>
-      </div>
-      <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-        <a href="https://www.tradelia.org/Pepperstone.html" class="text-blue-700 font-semibold underline" target="_blank">Pepperstone</a>
-        <p class="text-slate-600 mt-1 text-sm">CFD a commissioni competitive azioni</p>
-      </div>
-      <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-        <a href="https://www.tradelia.org/NAGA.html" class="text-blue-700 font-semibold underline" target="_blank">NAGA</a>
-        <p class="text-slate-600 mt-1 text-sm">Social trading, azioni reali frazionate e copytrading integrato multi-asset</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+    </section>
 
     <section id="disclaimer" class="text-xs text-slate-600 bg-white border border-slate-200 rounded-xl mt-16 mb-12 px-5 py-6 leading-relaxed shadow-inner">
       <h2 class="text-base font-semibold text-slate-800 mb-3">Disclaimer legale – Tradelia AI</h2>
@@ -154,7 +153,7 @@ export function generateHtmlPage({
         Prima di intraprendere qualsiasi operazione, si raccomanda di consultare un consulente finanziario indipendente, abilitato e in possesso dei requisiti previsti dalla legge.
       </p>
       <p class="italic text-slate-500">
-  Alcuni broker citati nel presente report possono prevedere affiliazione commerciale. La selezione è effettuata in modo autonomo da Tradelia AI, basandosi su criteri tecnici, operativi e di qualità dei servizi offerti, senza influenze dirette da parte degli intermediari.
+        Alcuni broker citati nel presente report possono prevedere affiliazione commerciale. La selezione è effettuata in modo autonomo da Tradelia AI, basandosi su criteri tecnici, operativi e di qualità dei servizi offerti, senza influenze dirette da parte degli intermediari.
       </p>
     </section>
   </main>
@@ -182,5 +181,5 @@ export function generateHtmlPage({
   </script>
 </body>
 </html>
-`;
+  `;
 }
