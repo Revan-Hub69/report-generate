@@ -3,14 +3,25 @@ export async function generateBloccoHTML(json, bloccoIndex, label, tooltipMap, s
 
   const righe = chiavi
     .map((key) => {
-      const valore = json[key].valore;
-      const stato = json[key].stato;
+      const voce = json[key] || {};
+      const valore = voce.valore || "—";
+      const stato = voce.stato || "neutro";
       const classe = statusToClass[stato] || "text-slate-700 font-bold";
-      const labelTooltip = tooltipMap?.[key]?.title || key;
+      const labelTooltip = tooltipMap?.[key]?.title || voce.etichetta || key;
+      const fonte = tooltipMap?.[key]?.fonti || "";
+      const descrizione = tooltipMap?.[key]?.descrizione || "";
 
       return `
         <div class="grid grid-cols-2 gap-2 border-b py-2">
-          <div class="text-slate-600 font-medium text-xs sm:text-sm">${labelTooltip}</div>
+          <div class="text-slate-600 font-medium text-xs sm:text-sm">
+            <div class="tooltip">
+              ${labelTooltip}
+              <div class="tooltip-text">
+                ${descrizione ? `<div class='tooltip-title'>${labelTooltip}</div><div>${descrizione}</div>` : labelTooltip}
+                ${fonte ? `<div class='tooltip-fonti'>Fonti: ${fonte}</div>` : ""}
+              </div>
+            </div>
+          </div>
           <div class="${classe} text-xs sm:text-sm">${valore}</div>
         </div>`;
     })
