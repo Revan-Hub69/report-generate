@@ -21,3 +21,12 @@
     "tailwindcss": "^3.4.1"
   }
 }
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src"]
+}
