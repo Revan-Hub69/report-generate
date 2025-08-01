@@ -1,54 +1,78 @@
 export const tooltipsBlocco1 = {
   ticker: {
     title: "Ticker",
-    description: "Sigla breve dell’azione nei mercati finanziari (es. TSLA per Tesla)."
+    description: "Simbolo identificativo dell’azione sul mercato (es. AAPL per Apple)."
   },
   isin: {
     title: "ISIN",
-    description: "Codice internazionale univoco del titolo, usato in tutta Europa."
+    description: "Codice internazionale che identifica in modo univoco il titolo (es. US0378331005)."
   },
   exchange: {
-    title: "Borsa di Quotazione",
-    description: "Mercato su cui è scambiata l’azione (es. NASDAQ, Borsa Italiana)."
+    title: "Exchange",
+    description: "Borsa principale in cui il titolo è quotato (es. NASDAQ, NYSE, XETRA)."
+  },
+  mic: {
+    title: "MIC",
+    description: "Codice identificativo del mercato secondo ISO 10383 (es. XNAS, XNYS)."
+  },
+  societa: {
+    title: "Società",
+    description: "Nome legale completo della società emittente."
   },
   settore: {
-    title: "Settore",
-    description: "Categoria economica dell’azienda (es. tecnologia, sanità, energia)."
+    title: "Settore (GICS)",
+    description: "Settore economico principale dell’azienda, secondo la classificazione GICS (es. Information Technology)."
+  },
+  industria: {
+    title: "Industria / Sottosettore (GICS)",
+    description: "Industria e sottosettore specifico secondo GICS (es. Semiconductors)."
+  },
+  indicePrimario: {
+    title: "Indice Primario",
+    description: "Indice principale in cui è incluso il titolo (es. S&P 500), con data di inclusione."
+  },
+  indiceSecondario: {
+    title: "Indice Secondario",
+    description: "Eventuale secondo indice di appartenenza (es. Nasdaq 100), con data di inclusione."
   },
   prezzoAttuale: {
     title: "Prezzo Attuale",
-    description: "Ultimo prezzo registrato sul mercato per questa azione."
+    description: "Ultimo prezzo di chiusura o prezzo live, con valuta e timestamp di aggiornamento."
   },
-  var24h: {
+  variazione24h: {
     title: "Variazione 24h",
-    description: "Quanto è salito o sceso il prezzo nelle ultime 24 ore."
+    description: "Performance del titolo rispetto al giorno precedente, in percentuale."
   },
-  var7g: {
+  variazione7gg: {
     title: "Variazione 7 giorni",
-    description: "Performance settimanale del titolo, in percentuale."
+    description: "Performance percentuale settimanale del titolo."
   },
-  var30g: {
+  variazione30gg: {
     title: "Variazione 30 giorni",
-    description: "Andamento mensile dell’azione, utile per capire la tendenza recente."
+    description: "Performance percentuale del titolo nell’ultimo mese."
   },
-  min52w: {
-    title: "Minimo 52 settimane",
-    description: "Prezzo più basso toccato dal titolo nell’ultimo anno."
+  prezzo52w: {
+    title: "Prezzo Min/Max 52 settimane",
+    description: "Valore minimo e massimo del titolo negli ultimi 12 mesi, con data dell’ultimo aggiornamento."
   },
-  max52w: {
-    title: "Massimo 52 settimane",
-    description: "Prezzo più alto raggiunto negli ultimi 12 mesi."
-  },
-  prezzoTarget: {
-    title: "Prezzo Target (Analisti)",
-    description: "Valore stimato dagli analisti come prezzo obiettivo nei prossimi mesi."
+  prezzoTargetAnalisti: {
+    title: "Prezzo Target Medio (Analisti)",
+    description: "Prezzo medio stimato dagli analisti, con numero di analisti attivi e data aggiornamento."
   },
   ratingAnalisti: {
-    title: "Rating Medio (Analisti)",
-    description: "Giudizio medio degli analisti: comprare, mantenere o vendere."
+    title: "Rating Analisti",
+    description: "Consenso medio degli analisti (Buy, Hold, Sell), con data della valutazione."
   },
   marketCap: {
-    title: "Capitalizzazione di Mercato",
-    description: "Valore totale dell’azienda in borsa (prezzo per numero di azioni)."
+    title: "Market Cap",
+    description: "Capitalizzazione di mercato, in valuta e con data del calcolo (es. prezzo × numero azioni)."
+  },
+  numeroAzioniTotali: {
+    title: "Numero Azioni Totali",
+    description: "Numero complessivo di azioni emesse (specificare classe), con data del filing ufficiale."
+  },
+  freeFloat: {
+    title: "Free Float",
+    description: "Percentuale di azioni liberamente scambiabili e numero assoluto di azioni flottanti."
   }
 };
