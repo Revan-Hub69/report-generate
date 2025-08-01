@@ -9,7 +9,7 @@ import { tooltips } from "../constants/tooltipsAll";
 
 export default function HtmlGenerator() {
   const [jsonData, setJsonData] = useState({});
-  const [htmlFinale, setHtmlFinale] = useState({});
+  const [htmlFinale, setHtmlFinale] = useState("");
   const [textareaValues, setTextareaValues] = useState({});
 
   const handleJsonTextChange = (event, bloccoKey) => {
@@ -20,23 +20,24 @@ export default function HtmlGenerator() {
       const parsed = JSON.parse(text);
       setJsonData((prev) => ({ ...prev, [bloccoKey]: parsed }));
     } catch (err) {
-      // Non fare nulla, errore gestito visivamente
+      // Errore silenziato per evidenziazione visiva
     }
   };
 
   const generaReport = async () => {
     const blocchiHtml = await Promise.all(
-      tabLabels.map(async (label, index) => {
+      tabLabels.slice(1).map(async (label, i) => {
+        const index = i + 1;
         const key = `blocco${index}`;
         const json = jsonData[key];
         if (!json) return `<section><p>Manca il JSON per ${label}</p></section>`;
-        return await generateBloccoHTML(json, index, label, tooltips[key], statusToClass);
+        return await generateBloccoHTML(json, index, label, tooltips[key] || {}, statusToClass);
       })
     );
 
     const html = generateHtmlPage({
       blocchiHtml,
-      tabLabels,
+      tabLabels: tabLabels.slice(1),
       titoloAsset: jsonData.blocco0?.titoloAsset || "Titolo Sconosciuto",
       ticker: jsonData.blocco0?.ticker || "N/A",
       dataReport: jsonData.blocco0?.dataReport || "01/08/2025",
