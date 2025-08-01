@@ -29,14 +29,25 @@ export function generateHtmlPage({
       overflow-x: auto;
       scrollbar-width: thin;
       scrollbar-color: #70a7e8 #e0e7ef;
-      padding-bottom: 2px;
-      margin-bottom: 6px;
+      padding: 6px 0 4px 0;
+      margin-bottom: 8px;
     }
     .tabs-scroll::-webkit-scrollbar { height: 8px; background-color: #e0e7ef; border-radius: 8px; }
     .tabs-scroll::-webkit-scrollbar-thumb { background-color: #70a7e8; border-radius: 8px; }
-    .tab-btn { transition: background 0.17s, color 0.13s; }
-    .tab-btn:hover, .tab-btn.active { background: #e0e7ef; color: #0369a1; }
-    .card-blocco:hover { background: #f7fafc; box-shadow: 0 2px 16px 0 rgba(50,120,200,0.07);}
+    .tab-btn {
+      transition: background 0.17s, color 0.13s;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: #e0e7ef;
+      color: #0369a1;
+      font-weight: 600;
+    }
+    .card-blocco:hover {
+      background: #f7fafc;
+      box-shadow: 0 2px 16px 0 rgba(50,120,200,0.07);
+    }
     .tooltip { position: relative; display: inline-block; cursor: pointer; z-index: 2; }
     .tooltip .tooltip-text {
       display: none;
@@ -65,12 +76,12 @@ export function generateHtmlPage({
     .tooltip .tooltip-title { font-weight: 700; color: #60a5fa; margin-bottom: 5px; }
     .tooltip .tooltip-fonti { color: #dbeafe; font-size: 12px; margin-top: 10px; }
     @media (max-width: 700px) {
-      .tab-btn { min-width: 170px; font-size: 13px; }
-      .card-blocco { padding: 1.1rem 0.7rem;}
+      .tab-btn { min-width: 170px; }
+      .card-blocco { padding: 1.1rem 0.7rem; }
       .tooltip .tooltip-text { min-width: 160px; max-width: 90vw; font-size: 13px; padding: 10px 9px; }
     }
     @media (min-width: 640px) {
-      .card-blocco { padding: 2.2rem 2.5rem;}
+      .card-blocco { padding: 2.2rem 2.5rem; }
     }
   </style>
 </head>
@@ -94,15 +105,11 @@ export function generateHtmlPage({
       </div>
     </section>
 
-    <nav class="w-full flex tabs-scroll space-x-1 px-2 pb-1">
-      ${tabLabels
-        .map(
-          (label, i) => `
-        <button class="tab-btn ${i === 0 ? 'active' : ''} px-4 py-2 rounded-t-lg font-semibold text-slate-800 bg-white border border-b-0 border-slate-200"
+    <nav class="w-full flex tabs-scroll space-x-2 px-2 pb-1">
+      ${tabLabels.map((label, i) => `
+        <button class="tab-btn ${i === 0 ? 'active' : ''} px-4 py-2 rounded-md font-medium text-slate-800 bg-white border border-slate-200"
           data-tab="blocco${i + 1}">${label}</button>
-      `
-        )
-        .join('')}
+      `).join('')}
     </nav>
 
     ${blocchiHtml.join("\n")}
@@ -110,12 +117,12 @@ export function generateHtmlPage({
     <section id="cta" class="my-10 space-y-4 text-sm">
       <div class="border-t pt-6">
         <h2 class="text-base font-semibold text-slate-800 mb-2">Broker selezionati Tradelia AI</h2>
-        <ul class="list-disc list-inside space-y-1">
-          <li><a href="https://www.tradelia.org/Exante.html" class="text-blue-700 underline">Exante</a> – accesso DMA e strumenti istituzionali</li>
-          <li><a href="https://www.tradelia.org/Freedom24.html" class="text-blue-700 underline">Freedom24</a> – azioni reali, ETF, T-Bill</li>
-          <li><a href="https://www.tradelia.org/AvaTrade.html" class="text-blue-700 underline">AvaOptions</a> – opzioni plain vanilla con margine</li>
-          <li><a href="https://www.tradelia.org/Pepperstone.html" class="text-blue-700 underline">Pepperstone</a> – CFD a commissioni basse</li>
-          <li><a href="https://www.tradelia.org/NAGA.html" class="text-blue-700 underline">NAGA</a> – copytrading e azioni frazionate</li>
+        <ul class="list-disc list-inside space-y-1 text-slate-700">
+          <li><a href="https://www.tradelia.org/Exante.html" class="text-blue-700 underline" target="_blank">Exante</a> – piattaforma professionale con accesso DMA, futures, azioni e opzioni globali</li>
+          <li><a href="https://www.tradelia.org/Freedom24.html" class="text-blue-700 underline" target="_blank">Freedom24</a> – accesso a IPO, ETF, titoli USA e obbligazioni sovrane</li>
+          <li><a href="https://www.tradelia.org/AvaTrade.html" class="text-blue-700 underline" target="_blank">AvaOptions</a> – trading su opzioni plain vanilla con interfaccia professionale</li>
+          <li><a href="https://www.tradelia.org/Pepperstone.html" class="text-blue-700 underline" target="_blank">Pepperstone</a> – CFD a commissioni competitive su FX, indici e commodities</li>
+          <li><a href="https://www.tradelia.org/NAGA.html" class="text-blue-700 underline" target="_blank">NAGA</a> – social trading e accesso a titoli frazionati con copytrader integrato</li>
         </ul>
       </div>
     </section>
@@ -131,6 +138,7 @@ export function generateHtmlPage({
         Prima di intraprendere qualsiasi operazione, si raccomanda di consultare un consulente finanziario indipendente, abilitato e in possesso dei requisiti previsti dalla legge.
       </p>
       <p class="italic text-slate-500">
+        Tradelia AI non è affiliato ad alcun broker o intermediario citato nel report. Tutti i riferimenti sono forniti a scopo descrittivo.
       </p>
     </section>
   </main>
