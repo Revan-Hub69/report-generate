@@ -30,8 +30,8 @@ export function generateHtmlPage({
       overflow-x: auto;
       scrollbar-width: thin;
       scrollbar-color: #70a7e8 #e0e7ef;
-      padding: 8px 8px 8px 8px;
-      margin-bottom: 12px;
+      padding: 12px 8px 12px 8px;
+      margin-bottom: 16px;
       -webkit-overflow-scrolling: touch;
     }
     .tabs-scroll::-webkit-scrollbar { height: 8px; background-color: #e0e7ef; border-radius: 8px; }
@@ -42,7 +42,7 @@ export function generateHtmlPage({
       white-space: nowrap;
       font-size: 0.875rem; /* text-sm */
       min-width: 120px;
-      padding: 0.25rem 0.75rem; /* py-1 px-3 */
+      padding: 0.75rem 1rem; /* py-3 px-4 */
       border-radius: 0.375rem;
       color: #334155;
       background-color: #fff;
@@ -163,7 +163,7 @@ export function generateHtmlPage({
       </div>
     </section>
 
-    <nav class="tabs-scroll w-full flex flex-wrap gap-2 px-2 py-2" role="tablist">
+    <nav class="tabs-scroll w-full flex flex-wrap gap-3 px-2 py-3" role="tablist">
       ${tabLabels.map((label, i) => `
         <button
           class="tab-btn ${i === activeIndex ? 'active' : ''}"
