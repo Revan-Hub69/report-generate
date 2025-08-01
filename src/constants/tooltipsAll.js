@@ -25,4 +25,6 @@ export const tooltips = {
   blocco10: tooltipsBlocco10,
   blocco11: tooltipsBlocco11,
   blocco12: tooltipsBlocco12,
-  blocco13: tooltipsBlocco13};
+  blocco13: tooltipsBlocco13
+};
+
