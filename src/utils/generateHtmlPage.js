@@ -4,7 +4,8 @@ export function generateHtmlPage({
   titoloAsset,
   ticker,
   dataReport,
-  immagineChart
+  immagineChart,
+  activeIndex = 0 // se usi React, tieni traccia qui dell’indice tab attivo
 }) {
   return `
 <!DOCTYPE html>
@@ -32,32 +33,64 @@ export function generateHtmlPage({
       padding: 6px 4px 4px 4px;
       margin-bottom: 8px;
       -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
     }
     .tabs-scroll::-webkit-scrollbar { height: 8px; background-color: #e0e7ef; border-radius: 8px; }
     .tabs-scroll::-webkit-scrollbar-thumb { background-color: #70a7e8; border-radius: 8px; }
     .tab-btn {
+      display: inline-block;
       transition: background 0.17s, color 0.13s;
       white-space: nowrap;
       font-size: 13px;
-      min-width: 160px;
-      padding-left: 1rem;
-      padding-right: 1rem;
+      min-width: 140px;
+      padding: 0.5rem 1rem;
       border-radius: 0.375rem;
+      color: #334155; /* slate-700 */
+      background-color: #fff;
+      border: 1px solid #cbd5e1; /* slate-300 */
+      cursor: pointer;
+      user-select: none;
     }
-    .tab-btn:hover, .tab-btn.active {
-      background: #e0e7ef;
-      color: #0369a1;
+    .tab-btn:hover:not(.active) {
+      background-color: #f1f5f9; /* gray-100 */
+      color: #0284c7; /* blue-600 */
+    }
+    .tab-btn.active {
+      background-color: #bfdbfe; /* blue-200 */
+      color: #1d4ed8; /* blue-700 */
       font-weight: 600;
+      border-color: #93c5fd; /* blue-300 */
+    }
+    .card-blocco {
+      max-width: 768px;
+      margin: 1.5rem auto;
+      padding: 1.5rem 2rem;
+      background-color: #fff;
+      border: 1px solid #e2e8f0; /* gray-300 */
+      border-radius: 1rem;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
     .card-blocco:hover {
-      background: #f7fafc;
-      box-shadow: 0 2px 16px 0 rgba(50,120,200,0.07);
+      background-color: #f9fafb; /* gray-50 */
+      box-shadow: 0 4px 12px rgb(50 120 200 / 0.1);
+    }
+    .card-blocco h3 {
+      font-weight: 600;
+      font-size: 1.125rem; /* 18px */
+      color: #0f172a;
+      margin-bottom: 1rem;
+    }
+    .card-blocco .flex-col > div:not(:last-child) {
+      border-bottom: 1px solid #e2e8f0; /* divide-y */
     }
     .tooltip {
       position: relative;
       display: inline-block;
       cursor: pointer;
-      z-index: 2;
+      color: #2563eb; /* blue-600 */
+      font-weight: 700;
+      user-select: none;
     }
     .tooltip .tooltip-text {
       display: none;
@@ -101,13 +134,21 @@ export function generateHtmlPage({
       margin-left: 6px;
     }
     @media (max-width: 700px) {
-      .tab-btn { min-width: 140px; font-size: 14px; }
+      .tab-btn {
+        min-width: 120px;
+        font-size: 12px;
+        padding: 0.4rem 0.75rem;
+      }
+      .card-blocco {
+        padding: 1rem 1.5rem;
+      }
     }
     @media (max-width: 400px) {
-      .tab-btn { min-width: 120px; font-size: 13px; padding-left: 0.75rem; padding-right: 0.75rem; }
-    }
-    @media (min-width: 640px) {
-      .card-blocco { padding: 2.2rem 2.5rem; }
+      .tab-btn {
+        min-width: 100px;
+        font-size: 11px;
+        padding: 0.3rem 0.5rem;
+      }
     }
   </style>
 </head>
@@ -131,45 +172,102 @@ export function generateHtmlPage({
       </div>
     </section>
 
-    <nav class="w-full flex tabs-scroll space-x-2 px-2 pb-1">
-      ${tabLabels.map((label, i) => `
-        <button class="tab-btn ${i === 0 ? 'active' : ''} px-4 py-2 rounded-md font-medium text-slate-800 bg-white border border-slate-200"
-          data-tab="blocco${i + 1}">${label}</button>
-      `).join('')}
+    <nav class="tabs-scroll w-full flex space-x-2 px-2 pb-1" role="tablist">
+      ${tabLabels
+        .map(
+          (label, i) => `<button
+        class="tab-btn ${i === activeIndex ? 'active' : ''}"
+        data-tab="blocco${i + 1}"
+        role="tab"
+        aria-selected="${i === activeIndex}"
+        tabindex="${i === activeIndex ? '0' : '-1'}"
+      >${label}</button>`
+        )
+        .join('')}
     </nav>
 
-    ${blocchiHtml.join("\n")}
+    ${blocchiHtml.join('\n')}
 
-    <section id="cta" class="my-10 text-sm">
-      <div class="border-t border-slate-200 pt-6 px-4 sm:px-0">
-        <h2 class="text-base font-semibold text-slate-800 mb-4">Broker selezionati Tradelia AI</h2>
-        <div class="space-y-4">
-          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-            <a href="https://www.tradelia.org/Exante.html" class="text-blue-700 font-semibold underline" target="_blank">Exante</a>
-            <p class="text-slate-600 mt-1 text-sm">Piattaforma professionale con accesso DMA, futures, azioni e opzioni globali</p>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-            <a href="https://www.tradelia.org/Freedom24.html" class="text-blue-700 font-semibold underline" target="_blank">Freedom24</a>
-            <p class="text-slate-600 mt-1 text-sm">Accesso a IPO, ETF, titoli USA e obbligazioni sovrane a lungo termine</p>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-            <a href="https://www.tradelia.org/AvaTrade.html" class="text-blue-700 font-semibold underline" target="_blank">AvaOptions</a>
-            <p class="text-slate-600 mt-1 text-sm">Trading su opzioni plain vanilla con interfaccia grafica professionale</p>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-            <a href="https://www.tradelia.org/Pepperstone.html" class="text-blue-700 font-semibold underline" target="_blank">Pepperstone</a>
-            <p class="text-slate-600 mt-1 text-sm">CFD a commissioni competitive azioni</p>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-            <a href="https://www.tradelia.org/NAGA.html" class="text-blue-700 font-semibold underline" target="_blank">NAGA</a>
-            <p class="text-slate-600 mt-1 text-sm">Social trading, azioni reali frazionate e copytrading integrato multi-asset</p>
-          </div>
+    <section
+      id="cta"
+      class="my-10 text-sm border-t border-slate-200 pt-6 px-4 sm:px-0 space-y-4"
+    >
+      <h2 class="text-base font-semibold text-slate-800 mb-4">Broker selezionati Tradelia AI</h2>
+      <div class="space-y-4">
+        <div
+          class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition"
+        >
+          <a
+            href="https://www.tradelia.org/Exante.html"
+            class="text-blue-700 font-semibold underline"
+            target="_blank"
+            >Exante</a
+          >
+          <p class="text-slate-600 mt-1 text-sm">
+            Piattaforma professionale con accesso DMA, futures, azioni e opzioni
+            globali
+          </p>
+        </div>
+        <div
+          class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition"
+        >
+          <a
+            href="https://www.tradelia.org/Freedom24.html"
+            class="text-blue-700 font-semibold underline"
+            target="_blank"
+            >Freedom24</a
+          >
+          <p class="text-slate-600 mt-1 text-sm">
+            Accesso a IPO, ETF, titoli USA e obbligazioni sovrane a lungo termine
+          </p>
+        </div>
+        <div
+          class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition"
+        >
+          <a
+            href="https://www.tradelia.org/AvaTrade.html"
+            class="text-blue-700 font-semibold underline"
+            target="_blank"
+            >AvaOptions</a
+          >
+          <p class="text-slate-600 mt-1 text-sm">
+            Trading su opzioni plain vanilla con interfaccia grafica professionale
+          </p>
+        </div>
+        <div
+          class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition"
+        >
+          <a
+            href="https://www.tradelia.org/Pepperstone.html"
+            class="text-blue-700 font-semibold underline"
+            target="_blank"
+            >Pepperstone</a
+          >
+          <p class="text-slate-600 mt-1 text-sm">CFD a commissioni competitive azioni</p>
+        </div>
+        <div
+          class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow transition"
+        >
+          <a
+            href="https://www.tradelia.org/NAGA.html"
+            class="text-blue-700 font-semibold underline"
+            target="_blank"
+            >NAGA</a
+          >
+          <p class="text-slate-600 mt-1 text-sm">
+            Social trading, azioni reali frazionate e copytrading integrato multi-asset
+          </p>
         </div>
       </div>
     </section>
 
-    <section id="disclaimer" class="text-xs text-slate-600 bg-white border border-slate-200 rounded-xl mt-16 mb-12 px-5 py-6 leading-relaxed shadow-inner">
-      <h2 class="text-base font-semibold text-slate-800 mb-3">Disclaimer legale – Tradelia AI</h2>
+    <section
+      id="disclaimer"
+      class="text-xs text-slate-600 bg-white border border-slate-200 rounded-xl mt-16 mb-12 px-5 py-6 leading-relaxed shadow-inner"
+    >
+      <h2 class="text-base font-semibold text-slate-800 mb-3">
+        Disclaimer legale – Tradelia AI
+      </h2>
       <p class="mb-3">
         Questo report è generato da Tradelia AI, un sistema automatizzato di analisi finanziaria che non opera come consulente abilitato ai sensi della normativa vigente.
         Le informazioni, i dati e i commenti presenti hanno finalità esclusivamente informative e non costituiscono in alcun modo una sollecitazione al pubblico risparmio né una raccomandazione personalizzata di investimento.
@@ -185,23 +283,27 @@ export function generateHtmlPage({
   </main>
 
   <script>
+    // Gestione tab
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const target = btn.getAttribute("data-tab");
-
         document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-
         document.querySelectorAll("section[id^='blocco']").forEach((sec) => {
-          sec.style.display = (sec.id === target) ? 'block' : 'none';
+          sec.style.display = sec.id === target ? "block" : "none";
         });
       });
     });
 
+    // Imposta all'avvio la prima tab visibile e attiva
     document.addEventListener("DOMContentLoaded", () => {
       const blocchi = document.querySelectorAll("section[id^='blocco']");
       blocchi.forEach((b, i) => {
-        b.style.display = (i === 0) ? 'block' : 'none';
+        b.style.display = i === 0 ? "block" : "none";
+      });
+      const tabs = document.querySelectorAll(".tab-btn");
+      tabs.forEach((t, i) => {
+        t.classList.toggle("active", i === 0);
       });
     });
   </script>
